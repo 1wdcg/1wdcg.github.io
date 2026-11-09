@@ -1,0 +1,524 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+    --bg-color: #f5f7f3;
+    --card-bg: #ffffff;
+    --primary-green: #1b3b2b;
+    --secondary-green: #2d5a40;
+    --accent-gold: #c29b38;
+    --text-dark: #2c332e;
+    --text-muted: #626e65;
+    --border-color: #e2e8df;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Pretendard', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Header & Hero */
+.hero-header {
+    background: linear-gradient(135deg, #1b3b2b 0%, #2d5a40 100%);
+    color: #fff;
+    padding: 2rem 1rem 4rem 1rem;
+    position: relative;
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #e5edd8;
+}
+
+nav a {
+    margin-left: 1.5rem;
+    color: #c0d1c3;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+.hero-content {
+    max-width: 1100px;
+    margin: 3rem auto 1rem auto;
+    text-align: center;
+}
+
+.hero-badge {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #e2f0d6;
+}
+
+.hero-content h1 {
+    font-size: 2.3rem;
+    margin: 1rem 0 0.5rem 0;
+}
+
+/* Layout Container */
+.main-container {
+    max-width: 1100px;
+    margin: -2rem auto 3rem auto;
+    padding: 0 1rem;
+}
+
+/* Profile / About Card */
+.profile-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(27, 59, 43, 0.08);
+    border: 1px solid var(--border-color);
+}
+
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #e9f0e8;
+    color: var(--primary-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.profile-info h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-green);
+}
+
+.profile-info p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.profile-tags span {
+    display: inline-block;
+    background: #edf2eb;
+    color: var(--secondary-green);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    margin-right: 6px;
+    font-weight: 600;
+}
+
+/* Section Title */
+.section-title {
+    font-size: 1.4rem;
+    color: var(--primary-green);
+    margin: 3rem 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Category Grid (6 blocks) */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.2rem;
+}
+
+.cat-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: all 0.25s ease;
+}
+
+.cat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--secondary-green);
+    box-shadow: 0 8px 20px rgba(45, 90, 64, 0.12);
+}
+
+.cat-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    background: #eaf2eb;
+    color: var(--secondary-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.cat-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.4rem;
+    color: var(--primary-green);
+}
+
+.cat-card p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+}
+
+/* Recent Posts */
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.post-item {
+    background: var(--card-bg);
+    padding: 1.4rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.post-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 12px;
+}
+
+.post-category {
+    color: var(--secondary-green);
+    font-weight: 700;
+}
+
+.post-title a:hover {
+    color: var(--secondary-green);
+}
+
+.post-excerpt {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 4rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+}
+
+
+/* Category Page Style */
+.category-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.category-header h1 {
+    color: var(--primary-green);
+    font-size: 2rem;
+}
+
+.category-header p {
+    color: var(--text-muted);
+}
+
+.category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.tab-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+    background: var(--secondary-green);
+    color: #fff;
+    border-color: var(--secondary-green);
+}
+
+.cat-group {
+    margin-bottom: 3.5rem;
+    scroll-margin-top: 2rem;
+}
+
+.cat-group-title {
+    font-size: 1.3rem;
+    color: var(--primary-green);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.2rem;
+}
+
+.empty-msg {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-style: italic;
+    padding: 1rem 0;
+}
+
+/* ==========================================
+   Post Detail Page Styles
+   ========================================== */
+.post-hero {
+    background: linear-gradient(135deg, #1b3b2b 0%, #2d5a40 100%);
+    color: #fff;
+    padding: 2rem 1rem 3.5rem 1rem;
+}
+
+.post-header-content {
+    max-width: 800px;
+    margin: 2.5rem auto 0 auto;
+    text-align: center;
+}
+
+.post-category-tag {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    color: #e2f0d6;
+    padding: 4px 14px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.post-main-title {
+    font-size: 2.1rem;
+    line-height: 1.35;
+    word-break: keep-all;
+    margin-bottom: 1rem;
+}
+
+.post-meta-info {
+    color: #c0d1c3;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Article Container */
+.post-article {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 10px 25px rgba(27, 59, 43, 0.08);
+    border: 1px solid var(--border-color);
+    margin-top: -2rem;
+}
+
+/* Typography inside Markdown */
+.post-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #2c332e;
+}
+
+.post-content h2 {
+    font-size: 1.5rem;
+    color: var(--primary-green);
+    margin: 2.5rem 0 1rem 0;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.post-content h3 {
+    font-size: 1.25rem;
+    color: var(--secondary-green);
+    margin: 1.8rem 0 0.8rem 0;
+}
+
+.post-content p {
+    margin-bottom: 1.2rem;
+}
+
+.post-content ul, .post-content ol {
+    margin: 1rem 0 1.5rem 1.5rem;
+}
+
+.post-content li {
+    margin-bottom: 0.4rem;
+}
+
+/* Blockquote & Callout */
+.post-content blockquote {
+    background: #f0f5ee;
+    border-left: 4px solid var(--secondary-green);
+    padding: 1rem 1.2rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+    color: var(--text-muted);
+}
+
+/* Code & Pre */
+.post-content pre {
+    border-radius: 10px;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+}
+
+.post-content code {
+    font-family: 'Fira Code', Consolas, Monaco, monospace;
+    font-size: 0.9rem;
+}
+
+.post-content p code {
+    background: #eaf2eb;
+    color: var(--primary-green);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* Table */
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+.post-content th, .post-content td {
+    border: 1px solid var(--border-color);
+    padding: 10px 14px;
+    text-align: left;
+}
+
+.post-content th {
+    background: #f0f5ee;
+    color: var(--primary-green);
+}
+
+/* Footer & Navigation */
+.post-footer-info {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.back-to-cat-btn {
+    display: inline-block;
+    background: #edf2eb;
+    color: var(--secondary-green);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.back-to-cat-btn:hover {
+    background: var(--secondary-green);
+    color: #fff;
+}
+
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.nav-prev, .nav-next {
+    flex: 1;
+}
+
+.nav-prev a, .nav-next a {
+    display: block;
+    padding: 1rem;
+    background: #f8faf7;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.nav-prev a:hover, .nav-next a:hover {
+    border-color: var(--secondary-green);
+    background: #fff;
+}
+
+.nav-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.nav-title {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary-green);
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nav-next {
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .post-article {
+        padding: 1.8rem 1.2rem;
+    }
+    .post-main-title {
+        font-size: 1.6rem;
+    }
+    .post-navigation {
+        flex-direction: column;
+    }
+    .nav-next {
+        text-align: left;
+    }
+}

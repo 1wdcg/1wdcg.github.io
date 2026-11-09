@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - {{ site.title }}</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 코드 하이라이팅을 위한 Prism.js / Highlight.js 스타일 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+</head>
+<body>
+
+    <!-- 포스트 전용 헤더 -->
+    <header class="post-hero">
+        <div class="nav-container">
+            <a href="/" class="logo"><i class="fa-solid fa-feather-pointed"></i> Security Nest</a>
+            <nav>
+                <a href="/">홈</a>
+                <a href="/category.html">카테고리</a>
+            </nav>
+        </div>
+
+        <div class="post-header-content">
+            <div class="post-category-tag">
+                <i class="fa-solid fa-tree"></i> {{ page.category | upcase }}
+            </div>
+            <h1 class="post-main-title">{{ page.title }}</h1>
+            <div class="post-meta-info">
+                <span><i class="fa-regular fa-calendar"></i> {{ page.date | date: "%Y년 %m월 %d일" }}</span>
+                {% if page.author %}
+                <span><i class="fa-regular fa-user"></i> {{ page.author }}</span>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- 본문 영역 -->
+        <article class="post-article">
+            <div class="post-content">
+                {{ content }}
+            </div>
+
+            <!-- 포스트 하단 태그 / 정보 -->
+            <div class="post-footer-info">
+                <a href="/category.html#{{ page.category }}" class="back-to-cat-btn">
+                    <i class="fa-solid fa-arrow-left"></i> {{ page.category }} 목록으로 돌아가기
+                </a>
+            </div>
+
+            <!-- 이전 글 / 다음 글 네비게이션 -->
+            <nav class="post-navigation">
+                <div class="nav-prev">
+                    {% if page.previous.url %}
+                    <a href="{{ page.previous.url }}">
+                        <span class="nav-label"><i class="fa-solid fa-chevron-left"></i> 이전 글</span>
+                        <span class="nav-title">{{ page.previous.title }}</span>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="nav-next">
+                    {% if page.next.url %}
+                    <a href="{{ page.next.url }}">
+                        <span class="nav-label">다음 글 <i class="fa-solid fa-chevron-right"></i></span>
+                        <span class="nav-title">{{ page.next.title }}</span>
+                    </a>
+                    {% endif %}
+                </div>
+            </nav>
+        </article>
+    </div>
+
+    <footer>
+        <p><i class="fa-solid fa-tree"></i> Security Nest &copy; {{ site.time | date: "%Y" }}. Planted with HTML & Jekyll.</p>
+    </footer>
+
+    <!-- 코드 구문 하이라이팅 스크립트 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
