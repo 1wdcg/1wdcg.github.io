@@ -99,18 +99,25 @@ nav a:hover {
     border: 1px solid var(--border-color);
 }
 
+/* 프로필 원형 아바타 박스 */
 .profile-avatar {
-    width: 90px;
-    height: 90px;
+    width: 95px;
+    height: 95px;
     border-radius: 50%;
-    background: #e9f0e8;
-    color: var(--primary-green);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.5rem;
+    overflow: hidden; /* 원형 밖으로 나가는 이미지 자르기 */
+    border: 3px solid var(--secondary-green); /* 테두리에 미드 그린 컬러 포인트 */
+    box-shadow: 0 4px 12px rgba(27, 59, 43, 0.15);
     flex-shrink: 0;
 }
+
+/* 내부 이미지 채움 설정 */
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 비율 유지하며 동그라미 안에 딱 맞게 채움 */
+    display: block;
+}
+
 
 .profile-info h2 {
     font-size: 1.3rem;
@@ -521,4 +528,101 @@ footer {
     .nav-next {
         text-align: left;
     }
+}
+
+/* ==========================================
+   1. 애니메이션 정의 (Keyframes)
+   ========================================== */
+
+/* 위로 부드럽게 올라오면서 나타나는 효과 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 새가 날아오르거나 나뭇잎이 살랑이는 듯한 플로팅 효과 */
+@keyframes floatAnim {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* ==========================================
+   2. 배경 사진 및 오버레이 설정
+   ========================================== */
+
+/* 헤더 영역에 숲 배경 이미지 및 그라데이션 어둡게 처리 */
+.hero-header, .post-hero {
+    /* Unsplash의 고화질 숲 이미지 적용 (원하는 이미지 URL로 변경 가능) */
+    background: linear-gradient(135deg, rgba(27, 59, 43, 0.88) 0%, rgba(45, 90, 64, 0.82) 100%),
+                url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    color: #fff;
+    padding: 2rem 1rem 4rem 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ==========================================
+   3. 요소별 애니메이션 적용
+   ========================================== */
+
+/* 메인 타이틀 및 소개 텍스트 등장 애니메이션 */
+.hero-content h1 {
+    font-size: 2.3rem;
+    margin: 1rem 0 0.5rem 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.hero-content p {
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+    opacity: 0; /* 애니메이션 시작 전 숨김 */
+}
+
+/* 로고의 새 깃털 아이콘 둥둥 뜨는 효과 */
+.logo i, .profile-avatar i {
+    display: inline-block;
+    animation: floatAnim 3s ease-in-out infinite;
+}
+
+/* 프로필 카드 및 카테고리 카드 등장에 시차를 둔 효과 */
+.profile-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(27, 59, 43, 0.08);
+    border: 1px solid var(--border-color);
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+}
+
+/* 카테고리 카드 호버 시 부드러운 확대 애니메이션 강화 */
+.cat-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.cat-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--secondary-green);
+    box-shadow: 0 12px 24px rgba(45, 90, 64, 0.15);
+}
+
+/* 카테고리 아이콘 호버 시 회전 애니메이션 */
+.cat-card:hover .cat-icon i {
+    transform: rotate(12deg) scale(1.1);
+    transition: transform 0.3s ease;
 }
