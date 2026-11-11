@@ -193,6 +193,52 @@ nav a:hover {
     color: var(--text-muted);
 }
 
+/* 카테고리 카드 전체 가운데 정렬 설정 */
+.cat-card {
+    display: flex;
+    flex-direction: column;   /* 아이콘 - 제목 - 설명을 위아래(세로)로 배치 */
+    align-items: center;      /* 가로 기준 중앙 정렬 */
+    justify-content: center;  /* 세로 기준 중앙 정렬 */
+    text-align: center;       /* 텍스트 가운데 정렬 */
+    padding: 2rem 1.5rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 카테고리 아이콘 영역 세로/가로 중앙 정렬 */
+.cat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;      /* 아이콘과 제목 사이 여백 */
+    width: 60px;
+    height: 60px;
+}
+
+/* Flaticon PNG 이미지 크기 및 가운데 정렬 */
+.cat-icon img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    display: block;
+}
+
+/* 카테고리 제목 및 설명 여백 조정 */
+.cat-card h3 {
+    margin: 0.5rem 0 0.3rem 0;
+    font-size: 1.15rem;
+    color: var(--primary-green);
+}
+
+.cat-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+
 /* Recent Posts */
 .post-list {
     display: flex;
