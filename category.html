@@ -264,9 +264,9 @@ permalink: /category.html
                 <div class="post-list">
                     {% assign count = 0 %}
                     {% for post in site.posts %}
-                        {% assign cat_str = post.categories | join: ' ' | downcase %}
-                        {% assign single_cat = post.category | downcase %}
-                        {% if cat_str contains 'bugbounty' or single_cat == 'bugbounty' %}
+                        {% assign cat_str = post.categories | join: '' | downcase | remove: ' ' %}
+                        {% assign single_cat = post.category | downcase | remove: ' ' %}
+                        {% if cat_str contains 'bugbounty' or cat_str contains 'bug' or single_cat contains 'bug' %}
                         {% assign count = count | plus: 1 %}
                         <article class="post-item">
                             <div class="post-meta">{{ post.date | date: "%Y.%m.%d" }}</div>
