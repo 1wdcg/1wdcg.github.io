@@ -2,7 +2,7 @@
 layout: post
 title: "시작"
 date: 2026-11-07
-categories: [Bug Bounty]
+categories: [bugbounty]
 tags: [start]
 ---
 
