@@ -5,7 +5,6 @@ permalink: /category.html
 ---
 
 <style>
-    /* 전체 배경: 어두운 초록과 딥 브라운 숲 테마 */
     body {
         background-color: #121915;
         color: #e0e6e3;
@@ -13,13 +12,64 @@ permalink: /category.html
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
+    /* 상단 보관소 네비게이션 헤더 */
+    .top-nav {
+        background-color: #16201a;
+        border-bottom: 1px solid #27362c;
+        padding: 0.8rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* 로고 스타일 */
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+
+    .logo-img {
+        height: 36px;
+        width: auto;
+    }
+
+    .logo-text-box {
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+    }
+
+    .logo-text-top {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #e0e6e3;
+    }
+
+    .logo-text-bottom {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #4ca1a3;
+    }
+
+    .home-link {
+        color: #92a699;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .home-link:hover {
+        color: #d1b280;
+    }
+
     .archive-container {
         max-width: 1100px;
-        margin: 2.5rem auto;
+        margin: 2rem auto;
         padding: 0 1.5rem;
     }
 
-    /* 보관소 헤더 */
     .archive-header {
         border-bottom: 2px solid #2e3d34;
         padding-bottom: 1.5rem;
@@ -27,10 +77,9 @@ permalink: /category.html
     }
 
     .archive-header h1 {
-        font-size: 2rem;
-        color: #d1b280; /* 마른 나무/우드 톤 Accent */
-        margin: 0 0 0.5rem 0;
-        font-weight: 700;
+        font-size: 1.8rem;
+        color: #d1b280;
+        margin: 0 0 0.4rem 0;
     }
 
     .archive-header p {
@@ -39,14 +88,12 @@ permalink: /category.html
         font-size: 0.95rem;
     }
 
-    /* 레이아웃: 좌측 탭 / 우측 카테고리 카드 영역 */
     .archive-layout {
         display: flex;
         gap: 2rem;
         align-items: flex-start;
     }
 
-    /* 2. 좌측 카테고리 탭 (사이드바) */
     .category-sidebar {
         width: 220px;
         flex-shrink: 0;
@@ -80,21 +127,18 @@ permalink: /category.html
         color: #e0e6e3;
     }
 
-    /* 활성화된 탭 스타일 (딥 그린 & 브라운 강조) */
     .tab-btn.active {
         background-color: #3b2d23;
         color: #e5c390;
         border-left: 4px solid #8c6843;
     }
 
-    /* 오른쪽 메인 포스팅 영역 */
     .category-content-area {
         flex-grow: 1;
     }
 
-    /* 2. 카테고리별 사각형 카드 그룹 */
     .cat-card-group {
-        display: none; /* JS로 선택된 카테고리만 display: block */
+        display: none;
         background-color: #19211c;
         border: 1px solid #28362d;
         border-left: 5px solid #485c4f;
@@ -120,7 +164,6 @@ permalink: /category.html
         font-weight: 600;
     }
 
-    /* 포스트 리스트 */
     .post-list {
         display: flex;
         flex-direction: column;
@@ -132,7 +175,6 @@ permalink: /category.html
         border: 1px solid #222e26;
         border-radius: 4px;
         padding: 1rem 1.25rem;
-        transition: border-color 0.2s ease;
     }
 
     .post-item:hover {
@@ -173,17 +215,19 @@ permalink: /category.html
         margin: 0;
         padding: 1rem 0;
     }
-
-    @media (max-width: 768px) {
-        .archive-layout {
-            flex-direction: column;
-        }
-        .category-sidebar {
-            width: 100%;
-            position: static;
-        }
-    }
 </style>
+
+<!-- 상단 네비게이션 헤더 (로고 포함) -->
+<div class="top-nav">
+    <a href="/" class="logo">
+        <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="security nest logo" class="logo-img">
+        <div class="logo-text-box">
+            <span class="logo-text-top">security</span>
+            <span class="logo-text-bottom">nest</span>
+        </div>
+    </a>
+    <a href="/" class="home-link">← 메인 홈으로</a>
+</div>
 
 <div class="archive-container">
     <header class="archive-header">
@@ -192,7 +236,7 @@ permalink: /category.html
     </header>
 
     <div class="archive-layout">
-        <!-- 2. 좌측 탭 메뉴 -->
+        <!-- 좌측 탭 메뉴 -->
         <nav class="category-sidebar">
             <button class="tab-btn active" onclick="switchCategory('all')">전체 보기</button>
             <button class="tab-btn" onclick="switchCategory('dev')">개발</button>
@@ -203,20 +247,18 @@ permalink: /category.html
             <button class="tab-btn" onclick="switchCategory('cert')">공모전 / 자격증</button>
         </nav>
 
-        <!-- 우측 메인 콘텐츠 (사각형 카드 분리) -->
+        <!-- 우측 메인 콘텐츠 -->
         <div class="category-content-area">
 
             <!-- 1. 개발 -->
             <section id="cat-dev" class="cat-card-group active">
-                <div class="cat-title-bar">
-                    <h2>개발 (Dev)</h2>
-                </div>
+                <div class="cat-title-bar"><h2>개발 (Dev)</h2></div>
                 <div class="post-list">
                     {% assign count = 0 %}
                     {% for post in site.posts %}
-                        {% assign cat_str = post.categories | join: ' ' | downcase %}
-                        {% assign single_cat = post.category | downcase %}
-                        {% if cat_str contains 'dev' or single_cat == 'dev' %}
+                        {% assign cat_str = post.categories | join: '' | downcase | remove: ' ' %}
+                        {% assign single_cat = post.category | downcase | remove: ' ' %}
+                        {% if cat_str contains 'dev' or single_cat contains 'dev' %}
                         {% assign count = count | plus: 1 %}
                         <article class="post-item">
                             <div class="post-meta">{{ post.date | date: "%Y.%m.%d" }}</div>
@@ -225,23 +267,19 @@ permalink: /category.html
                         </article>
                         {% endif %}
                     {% endfor %}
-                    {% if count == 0 %}
-                        <p class="empty-msg">등록된 포스팅이 없습니다.</p>
-                    {% endif %}
+                    {% if count == 0 %}<p class="empty-msg">등록된 포스팅이 없습니다.</p>{% endif %}
                 </div>
             </section>
 
             <!-- 2. CTF / Wargame -->
             <section id="cat-ctf" class="cat-card-group active">
-                <div class="cat-title-bar">
-                    <h2>CTF / Wargame</h2>
-                </div>
+                <div class="cat-title-bar"><h2>CTF / Wargame</h2></div>
                 <div class="post-list">
                     {% assign count = 0 %}
                     {% for post in site.posts %}
-                        {% assign cat_str = post.categories | join: ' ' | downcase %}
-                        {% assign single_cat = post.category | downcase %}
-                        {% if cat_str contains 'ctf' or single_cat == 'ctf' %}
+                        {% assign cat_str = post.categories | join: '' | downcase | remove: ' ' %}
+                        {% assign single_cat = post.category | downcase | remove: ' ' %}
+                        {% if cat_str contains 'ctf' or single_cat contains 'ctf' %}
                         {% assign count = count | plus: 1 %}
                         <article class="post-item">
                             <div class="post-meta">{{ post.date | date: "%Y.%m.%d" }}</div>
@@ -250,17 +288,13 @@ permalink: /category.html
                         </article>
                         {% endif %}
                     {% endfor %}
-                    {% if count == 0 %}
-                        <p class="empty-msg">등록된 포스팅이 없습니다.</p>
-                    {% endif %}
+                    {% if count == 0 %}<p class="empty-msg">등록된 포스팅이 없습니다.</p>{% endif %}
                 </div>
             </section>
 
             <!-- 3. Bug Bounty -->
             <section id="cat-bugbounty" class="cat-card-group active">
-                <div class="cat-title-bar">
-                    <h2>Bug Bounty</h2>
-                </div>
+                <div class="cat-title-bar"><h2>Bug Bounty</h2></div>
                 <div class="post-list">
                     {% assign count = 0 %}
                     {% for post in site.posts %}
@@ -275,23 +309,19 @@ permalink: /category.html
                         </article>
                         {% endif %}
                     {% endfor %}
-                    {% if count == 0 %}
-                        <p class="empty-msg">등록된 포스팅이 없습니다.</p>
-                    {% endif %}
+                    {% if count == 0 %}<p class="empty-msg">등록된 포스팅이 없습니다.</p>{% endif %}
                 </div>
             </section>
 
             <!-- 4. 기술문서 -->
             <section id="cat-docs" class="cat-card-group active">
-                <div class="cat-title-bar">
-                    <h2>기술문서</h2>
-                </div>
+                <div class="cat-title-bar"><h2>기술문서</h2></div>
                 <div class="post-list">
                     {% assign count = 0 %}
                     {% for post in site.posts %}
-                        {% assign cat_str = post.categories | join: ' ' | downcase %}
-                        {% assign single_cat = post.category | downcase %}
-                        {% if cat_str contains 'docs' or single_cat == 'docs' %}
+                        {% assign cat_str = post.categories | join: '' | downcase | remove: ' ' %}
+                        {% assign single_cat = post.category | downcase | remove: ' ' %}
+                        {% if cat_str contains 'docs' or single_cat contains 'docs' %}
                         {% assign count = count | plus: 1 %}
                         <article class="post-item">
                             <div class="post-meta">{{ post.date | date: "%Y.%m.%d" }}</div>
@@ -300,23 +330,19 @@ permalink: /category.html
                         </article>
                         {% endif %}
                     {% endfor %}
-                    {% if count == 0 %}
-                        <p class="empty-msg">등록된 포스팅이 없습니다.</p>
-                    {% endif %}
+                    {% if count == 0 %}<p class="empty-msg">등록된 포스팅이 없습니다.</p>{% endif %}
                 </div>
             </section>
 
             <!-- 5. 논문 / 컨퍼런스 -->
             <section id="cat-paper" class="cat-card-group active">
-                <div class="cat-title-bar">
-                    <h2>논문 / 컨퍼런스</h2>
-                </div>
+                <div class="cat-title-bar"><h2>논문 / 컨퍼런스</h2></div>
                 <div class="post-list">
                     {% assign count = 0 %}
                     {% for post in site.posts %}
-                        {% assign cat_str = post.categories | join: ' ' | downcase %}
-                        {% assign single_cat = post.category | downcase %}
-                        {% if cat_str contains 'paper' or single_cat == 'paper' %}
+                        {% assign cat_str = post.categories | join: '' | downcase | remove: ' ' %}
+                        {% assign single_cat = post.category | downcase | remove: ' ' %}
+                        {% if cat_str contains 'paper' or single_cat contains 'paper' %}
                         {% assign count = count | plus: 1 %}
                         <article class="post-item">
                             <div class="post-meta">{{ post.date | date: "%Y.%m.%d" }}</div>
@@ -325,23 +351,19 @@ permalink: /category.html
                         </article>
                         {% endif %}
                     {% endfor %}
-                    {% if count == 0 %}
-                        <p class="empty-msg">등록된 포스팅이 없습니다.</p>
-                    {% endif %}
+                    {% if count == 0 %}<p class="empty-msg">등록된 포스팅이 없습니다.</p>{% endif %}
                 </div>
             </section>
 
             <!-- 6. 공모전 / 자격증 -->
             <section id="cat-cert" class="cat-card-group active">
-                <div class="cat-title-bar">
-                    <h2>공모전 / 자격증</h2>
-                </div>
+                <div class="cat-title-bar"><h2>공모전 / 자격증</h2></div>
                 <div class="post-list">
                     {% assign count = 0 %}
                     {% for post in site.posts %}
-                        {% assign cat_str = post.categories | join: ' ' | downcase %}
-                        {% assign single_cat = post.category | downcase %}
-                        {% if cat_str contains 'cert' or single_cat == 'cert' %}
+                        {% assign cat_str = post.categories | join: '' | downcase | remove: ' ' %}
+                        {% assign single_cat = post.category | downcase | remove: ' ' %}
+                        {% if cat_str contains 'cert' or single_cat contains 'cert' %}
                         {% assign count = count | plus: 1 %}
                         <article class="post-item">
                             <div class="post-meta">{{ post.date | date: "%Y.%m.%d" }}</div>
@@ -350,9 +372,7 @@ permalink: /category.html
                         </article>
                         {% endif %}
                     {% endfor %}
-                    {% if count == 0 %}
-                        <p class="empty-msg">등록된 포스팅이 없습니다.</p>
-                    {% endif %}
+                    {% if count == 0 %}<p class="empty-msg">등록된 포스팅이 없습니다.</p>{% endif %}
                 </div>
             </section>
 
@@ -361,16 +381,13 @@ permalink: /category.html
 </div>
 
 <script>
-    // 탭 클릭 이벤트 핸들러
     function switchCategory(categoryKey) {
         const buttons = document.querySelectorAll('.tab-btn');
         const groups = document.querySelectorAll('.cat-card-group');
 
-        // 버튼 활성화 처리
         buttons.forEach(btn => btn.classList.remove('active'));
         event.target.classList.add('active');
 
-        // 콘텐츠 섹션 필터링
         groups.forEach(group => {
             if (categoryKey === 'all') {
                 group.classList.add('active');
@@ -384,7 +401,6 @@ permalink: /category.html
         });
     }
 
-    // URL 해시값(#dev 등) 접속 대응
     window.addEventListener('DOMContentLoaded', () => {
         const hash = window.location.hash.replace('#', '');
         if (hash) {

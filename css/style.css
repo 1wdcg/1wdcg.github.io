@@ -45,10 +45,41 @@ a {
     align-items: center;
 }
 
+/* 로고 영역 컨테이너 */
 .logo {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #e5edd8;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+/* 로고 이미지 크기 (가이드의 40px 헤더 규격 적용) */
+.logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* 텍스트 2줄 구조 (security / nest) */
+.logo-text-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.05;
+}
+
+.logo-text-top {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.logo-text-bottom {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #4ca1a3; /* 로고 포인트 청록색 톤 */
+    letter-spacing: -0.3px;
 }
 
 nav a {
@@ -238,43 +269,6 @@ nav a:hover {
     color: #666;
 }
 
-
-/* Recent Posts */
-.post-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.post-item {
-    background: var(--card-bg);
-    padding: 1.4rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-}
-
-.post-meta {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
-    display: flex;
-    gap: 12px;
-}
-
-.post-category {
-    color: var(--secondary-green);
-    font-weight: 700;
-}
-
-.post-title a:hover {
-    color: var(--secondary-green);
-}
-
-.post-excerpt {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin-top: 0.4rem;
-}
 
 /* Footer */
 footer {
