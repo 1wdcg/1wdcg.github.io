@@ -27,19 +27,16 @@ title: 카테고리 모아보기
         <section id="dev" class="cat-group">
             <h2 class="cat-group-title"><i class="fa-solid fa-code"></i> 개발 (Dev)</h2>
             <div class="post-list">
-                {% assign dev_posts = site.categories.dev | default: site.posts %}
-                {% for post in dev_posts %}
+                {% for post in site.posts %}
                     {% if post.category == 'dev' or post.categories contains 'dev' %}
                     <article class="post-item">
                         <div class="post-meta">
                             <span class="post-date"><i class="fa-regular fa-calendar"></i> {{ post.date | date: "%Y.%m.%d" }}</span>
                         </div>
-                        <h3 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                        <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
                         <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
                     </article>
                     {% endif %}
-                {% else %}
-                    <p class="empty-msg">등록된 포스팅이 아직 없습니다. <i class="fa-solid fa-seedling"></i></p>
                 {% endfor %}
             </div>
         </section>
