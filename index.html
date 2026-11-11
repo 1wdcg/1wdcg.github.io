@@ -50,41 +50,56 @@
             <h2 class="section-title"><i class="fa-solid fa-leaf"></i> Categories</h2>
             <div class="category-grid">
                 
-                <a href="/category/dev" class="cat-card">
-                    <div class="cat-icon"><i class="fa-solid fa-code"></i></div>
+               <!-- 1. 새집 아이콘 예시 -->
+                <a href="{{ '/category.html#dev' | relative_url }}" class="cat-card">
+                    <div class="cat-icon">
+                        <img src="{{ '/assets/images/nest.png' | relative_url }}" alt="둥지">
+                    </div>
                     <h3>개발</h3>
-                    <p>웹/앱 개발, 시스템 구축 및 스크립팅 기록</p>
+                    <p>웹 개발 및 시스템 구축, 스크립팅 기록</p>
                 </a>
 
-                <a href="/category/ctf" class="cat-card">
-                    <div class="cat-icon"><i class="fa-solid fa-flag"></i></div>
+<!-- 2. 둥지 아이콘 예시 -->
+                <a href="{{ '/category.html#ctf' | relative_url }}" class="cat-card">
+                    <div class="cat-icon">
+                        <img src="{{ '/assets/images/egg.png' | relative_url }}" alt="알">
+                    </div>
                     <h3>CTF / Wargame</h3>
-                    <p>Dreamhack, Webhack, CTF Write-up</p>
+                    <p>문제 풀이 및 Write-up</p>
                 </a>
 
-                <a href="/category/bugbounty" class="cat-card">
-                    <div class="cat-icon"><i class="fa-solid fa-bug"></i></div>
+                <a href="{{ '/category.html#bugbounty' | relative_url }}" class="cat-card">
+                    <div class="cat-icon">
+                        <img src="{{ '/assets/images/bug.png' | relative_url }}" alt="벌레">
+                    </div>
                     <h3>Bug Bounty</h3>
                     <p>취약점 제보, PoC 작성 및 보안 이슈 분석</p>
                 </a>
 
-                <a href="/category/docs" class="cat-card">
-                    <div class="cat-icon"><i class="fa-solid fa-book-open"></i></div>
+                <a href="{{ '/category.html#docs' | relative_url }}" class="cat-card">
+                    <div class="cat-icon">
+                        <img src="{{ '/assets/images/wing.png' | relative_url }}" alt="날개">
+                    </div>
                     <h3>블로그 / 기술문서</h3>
                     <p>개발 트러블슈팅, 기술 가이드 및 일상 생각</p>
                 </a>
 
-                <a href="/category/paper" class="cat-card">
-                    <div class="cat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <a href="{{ '/category.html#paper' | relative_url }}" class="cat-card">
+                    <div class="cat-icon">
+                        <img src="{{ '/assets/images/bird-house.png' | relative_url }}" alt="새집">
+                    </div>
                     <h3>논문 / 컨퍼런스</h3>
-                    <p>보안 컨퍼런스 참관기 및 학술 논문 요약</p>
+                    <p>학술 논문 요약 및 보안 컨퍼런스 참관</p>
                 </a>
 
-                <a href="/category/cert" class="cat-card">
-                    <div class="cat-icon"><i class="fa-solid fa-award"></i></div>
+                <a href="{{ '/category.html#cert' | relative_url }}" class="cat-card">
+                    <div class="cat-icon">
+                        <img src="{{ '/assets/images/apple.png' | relative_url }}" alt="사과">
+                    </div>
                     <h3>공모전 / 자격증</h3>
-                    <p>해킹 대회, 보안 자격증 합격 수기 및 정보</p>
+                    <p>공모전, 보안 자격증 합격 수기 및 정보</p>
                 </a>
+
 
             </div>
         </section>

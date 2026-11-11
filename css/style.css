@@ -173,17 +173,13 @@ nav a:hover {
     box-shadow: 0 8px 20px rgba(45, 90, 64, 0.12);
 }
 
-.cat-icon {
-    width: 45px;
-    height: 45px;
-    border-radius: 10px;
-    background: #eaf2eb;
-    color: var(--secondary-green);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+/* 카테고리 이미지 아이콘 스타일 */
+.cat-icon img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 
 .cat-card h3 {
