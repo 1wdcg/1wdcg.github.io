@@ -1,135 +1,399 @@
 ---
 layout: default
-title: 카테고리 모아보기
+title: 카테고리 보관소
+permalink: /category.html
 ---
 
-<div class="main-container" style="margin-top: 2rem;">
-    <!-- 카테고리 페이지 헤더 -->
-    <header class="category-header">
-        <h1><i class="fa-solid fa-folder-open"></i> 카테고리 보관소</h1>
-        <p>각 주제별로 정리된 보안 및 개발 포스팅 모음입니다.</p>
+<style>
+    /* 전체 배경: 어두운 초록과 딥 브라운 숲 테마 */
+    body {
+        background-color: #121915;
+        color: #e0e6e3;
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    .archive-container {
+        max-width: 1100px;
+        margin: 2.5rem auto;
+        padding: 0 1.5rem;
+    }
+
+    /* 보관소 헤더 */
+    .archive-header {
+        border-bottom: 2px solid #2e3d34;
+        padding-bottom: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .archive-header h1 {
+        font-size: 2rem;
+        color: #d1b280; /* 마른 나무/우드 톤 Accent */
+        margin: 0 0 0.5rem 0;
+        font-weight: 700;
+    }
+
+    .archive-header p {
+        color: #8fa396;
+        margin: 0;
+        font-size: 0.95rem;
+    }
+
+    /* 레이아웃: 좌측 탭 / 우측 카테고리 카드 영역 */
+    .archive-layout {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+
+    /* 2. 좌측 카테고리 탭 (사이드바) */
+    .category-sidebar {
+        width: 220px;
+        flex-shrink: 0;
+        background-color: #1a231e;
+        border: 1px solid #2a3830;
+        border-radius: 6px;
+        padding: 0.5rem;
+        position: sticky;
+        top: 2rem;
+    }
+
+    .tab-btn {
+        display: block;
+        width: 100%;
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.25rem;
+        background: transparent;
+        color: #a3b8ab;
+        border: none;
+        border-radius: 4px;
+        text-align: left;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+    }
+
+    .tab-btn:hover {
+        background-color: #243029;
+        color: #e0e6e3;
+    }
+
+    /* 활성화된 탭 스타일 (딥 그린 & 브라운 강조) */
+    .tab-btn.active {
+        background-color: #3b2d23;
+        color: #e5c390;
+        border-left: 4px solid #8c6843;
+    }
+
+    /* 오른쪽 메인 포스팅 영역 */
+    .category-content-area {
+        flex-grow: 1;
+    }
+
+    /* 2. 카테고리별 사각형 카드 그룹 */
+    .cat-card-group {
+        display: none; /* JS로 선택된 카테고리만 display: block */
+        background-color: #19211c;
+        border: 1px solid #28362d;
+        border-left: 5px solid #485c4f;
+        border-radius: 6px;
+        padding: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .cat-card-group.active {
+        display: block;
+    }
+
+    .cat-title-bar {
+        border-bottom: 1px solid #2a3830;
+        padding-bottom: 0.75rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .cat-title-bar h2 {
+        font-size: 1.35rem;
+        color: #d1b280;
+        margin: 0;
+        font-weight: 600;
+    }
+
+    /* 포스트 리스트 */
+    .post-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .post-item {
+        background-color: #141c17;
+        border: 1px solid #222e26;
+        border-radius: 4px;
+        padding: 1rem 1.25rem;
+        transition: border-color 0.2s ease;
+    }
+
+    .post-item:hover {
+        border-color: #524133;
+    }
+
+    .post-meta {
+        font-size: 0.8rem;
+        color: #718779;
+        margin-bottom: 0.3rem;
+    }
+
+    .post-title {
+        margin: 0 0 0.4rem 0;
+        font-size: 1.1rem;
+    }
+
+    .post-title a {
+        color: #cee0d5;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .post-title a:hover {
+        color: #e5c390;
+    }
+
+    .post-excerpt {
+        margin: 0;
+        font-size: 0.88rem;
+        color: #92a699;
+        line-height: 1.5;
+    }
+
+    .empty-msg {
+        color: #6a7d71;
+        font-size: 0.9rem;
+        margin: 0;
+        padding: 1rem 0;
+    }
+
+    @media (max-width: 768px) {
+        .archive-layout {
+            flex-direction: column;
+        }
+        .category-sidebar {
+            width: 100%;
+            position: static;
+        }
+    }
+</style>
+
+<div class="archive-container">
+    <header class="archive-header">
+        <h1>카테고리 보관소</h1>
+        <p>주제별로 분류된 보안 및 개발 기록 목록입니다.</p>
     </header>
 
-    <!-- 6개 카테고리 탭 (상단 이동 렌즈) -->
-    <nav class="category-tabs">
-        <a href="#dev" class="tab-btn"><i class="fa-solid fa-code"></i> 개발</a>
-        <a href="#ctf" class="tab-btn"><i class="fa-solid fa-flag"></i> CTF / Wargame</a>
-        <a href="#bugbounty" class="tab-btn"><i class="fa-solid fa-bug"></i> Bug Bounty</a>
-        <a href="#docs" class="tab-btn"><i class="fa-solid fa-book-open"></i> 기술문서</a>
-        <a href="#paper" class="tab-btn"><i class="fa-solid fa-graduation-cap"></i> 논문 / 컨퍼런스</a>
-        <a href="#cert" class="tab-btn"><i class="fa-solid fa-award"></i> 공모전 / 자격증</a>
-    </nav>
+    <div class="archive-layout">
+        <!-- 2. 좌측 탭 메뉴 -->
+        <nav class="category-sidebar">
+            <button class="tab-btn active" onclick="switchCategory('all')">전체 보기</button>
+            <button class="tab-btn" onclick="switchCategory('dev')">개발</button>
+            <button class="tab-btn" onclick="switchCategory('ctf')">CTF / Wargame</button>
+            <button class="tab-btn" onclick="switchCategory('bugbounty')">Bug Bounty</button>
+            <button class="tab-btn" onclick="switchCategory('docs')">기술문서</button>
+            <button class="tab-btn" onclick="switchCategory('paper')">논문 / 컨퍼런스</button>
+            <button class="tab-btn" onclick="switchCategory('cert')">공모전 / 자격증</button>
+        </nav>
 
-    <!-- 카테고리별 포스팅 목록 그룹 -->
-    <div class="category-sections">
+        <!-- 우측 메인 콘텐츠 (사각형 카드 분리) -->
+        <div class="category-content-area">
 
-        <!-- 1. 개발 -->
-        <section id="dev" class="cat-group">
-            <h2 class="cat-group-title"><i class="fa-solid fa-code"></i> 개발 (Dev)</h2>
-            <div class="post-list">
-                {% for post in site.posts %}
-                    {% if post.category == 'dev' or post.categories contains 'dev' %}
-                    <article class="post-item">
-                        <div class="post-meta">
-                            <span class="post-date"><i class="fa-regular fa-calendar"></i> {{ post.date | date: "%Y.%m.%d" }}</span>
-                        </div>
-                        <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-                        <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
-                    </article>
+            <!-- 1. 개발 -->
+            <section id="cat-dev" class="cat-card-group active">
+                <div class="cat-title-bar">
+                    <h2>개발 (Dev)</h2>
+                </div>
+                <div class="post-list">
+                    {% assign count = 0 %}
+                    {% for post in site.posts %}
+                        {% assign cat_str = post.categories | join: ' ' | downcase %}
+                        {% assign single_cat = post.category | downcase %}
+                        {% if cat_str contains 'dev' or single_cat == 'dev' %}
+                        {% assign count = count | plus: 1 %}
+                        <article class="post-item">
+                            <div class="post-meta">{{ post.date | date: "%Y.%m.%d" }}</div>
+                            <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                            <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+                        </article>
+                        {% endif %}
+                    {% endfor %}
+                    {% if count == 0 %}
+                        <p class="empty-msg">등록된 포스팅이 없습니다.</p>
                     {% endif %}
-                {% endfor %}
-            </div>
-        </section>
+                </div>
+            </section>
 
-        <!-- 2. CTF / Wargame -->
-        <section id="ctf" class="cat-group">
-            <h2 class="cat-group-title"><i class="fa-solid fa-flag"></i> CTF / Wargame</h2>
-            <div class="post-list">
-                {% for post in site.posts %}
-                    {% if post.category == 'ctf' or post.categories contains 'ctf' %}
-                    <article class="post-item">
-                        <div class="post-meta">
-                            <span class="post-date"><i class="fa-regular fa-calendar"></i> {{ post.date | date: "%Y.%m.%d" }}</span>
-                        </div>
-                        <h3 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                        <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
-                    </article>
+            <!-- 2. CTF / Wargame -->
+            <section id="cat-ctf" class="cat-card-group active">
+                <div class="cat-title-bar">
+                    <h2>CTF / Wargame</h2>
+                </div>
+                <div class="post-list">
+                    {% assign count = 0 %}
+                    {% for post in site.posts %}
+                        {% assign cat_str = post.categories | join: ' ' | downcase %}
+                        {% assign single_cat = post.category | downcase %}
+                        {% if cat_str contains 'ctf' or single_cat == 'ctf' %}
+                        {% assign count = count | plus: 1 %}
+                        <article class="post-item">
+                            <div class="post-meta">{{ post.date | date: "%Y.%m.%d" }}</div>
+                            <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                            <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+                        </article>
+                        {% endif %}
+                    {% endfor %}
+                    {% if count == 0 %}
+                        <p class="empty-msg">등록된 포스팅이 없습니다.</p>
                     {% endif %}
-                {% endfor %}
-            </div>
-        </section>
+                </div>
+            </section>
 
-        <!-- 3. Bug Bounty -->
-        <section id="bugbounty" class="cat-group">
-            <h2 class="cat-group-title"><i class="fa-solid fa-bug"></i> Bug Bounty</h2>
-            <div class="post-list">
-                {% for post in site.posts %}
-                    {% if post.category == 'bugbounty' or post.categories contains 'bugbounty' %}
-                    <article class="post-item">
-                        <div class="post-meta">
-                            <span class="post-date"><i class="fa-regular fa-calendar"></i> {{ post.date | date: "%Y.%m.%d" }}</span>
-                        </div>
-                        <h3 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                        <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
-                    </article>
+            <!-- 3. Bug Bounty -->
+            <section id="cat-bugbounty" class="cat-card-group active">
+                <div class="cat-title-bar">
+                    <h2>Bug Bounty</h2>
+                </div>
+                <div class="post-list">
+                    {% assign count = 0 %}
+                    {% for post in site.posts %}
+                        {% assign cat_str = post.categories | join: ' ' | downcase %}
+                        {% assign single_cat = post.category | downcase %}
+                        {% if cat_str contains 'bugbounty' or single_cat == 'bugbounty' %}
+                        {% assign count = count | plus: 1 %}
+                        <article class="post-item">
+                            <div class="post-meta">{{ post.date | date: "%Y.%m.%d" }}</div>
+                            <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                            <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+                        </article>
+                        {% endif %}
+                    {% endfor %}
+                    {% if count == 0 %}
+                        <p class="empty-msg">등록된 포스팅이 없습니다.</p>
                     {% endif %}
-                {% endfor %}
-            </div>
-        </section>
+                </div>
+            </section>
 
-        <!-- 4. 블로그 / 기술문서 -->
-        <section id="docs" class="cat-group">
-            <h2 class="cat-group-title"><i class="fa-solid fa-book-open"></i> 블로그 / 기술문서</h2>
-            <div class="post-list">
-                {% for post in site.posts %}
-                    {% if post.category == 'docs' or post.categories contains 'docs' %}
-                    <article class="post-item">
-                        <div class="post-meta">
-                            <span class="post-date"><i class="fa-regular fa-calendar"></i> {{ post.date | date: "%Y.%m.%d" }}</span>
-                        </div>
-                        <h3 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                        <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
-                    </article>
+            <!-- 4. 기술문서 -->
+            <section id="cat-docs" class="cat-card-group active">
+                <div class="cat-title-bar">
+                    <h2>기술문서</h2>
+                </div>
+                <div class="post-list">
+                    {% assign count = 0 %}
+                    {% for post in site.posts %}
+                        {% assign cat_str = post.categories | join: ' ' | downcase %}
+                        {% assign single_cat = post.category | downcase %}
+                        {% if cat_str contains 'docs' or single_cat == 'docs' %}
+                        {% assign count = count | plus: 1 %}
+                        <article class="post-item">
+                            <div class="post-meta">{{ post.date | date: "%Y.%m.%d" }}</div>
+                            <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                            <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+                        </article>
+                        {% endif %}
+                    {% endfor %}
+                    {% if count == 0 %}
+                        <p class="empty-msg">등록된 포스팅이 없습니다.</p>
                     {% endif %}
-                {% endfor %}
-            </div>
-        </section>
+                </div>
+            </section>
 
-        <!-- 5. 논문 / 컨퍼런스 -->
-        <section id="paper" class="cat-group">
-            <h2 class="cat-group-title"><i class="fa-solid fa-graduation-cap"></i> 논문 / 컨퍼런스</h2>
-            <div class="post-list">
-                {% for post in site.posts %}
-                    {% if post.category == 'paper' or post.categories contains 'paper' %}
-                    <article class="post-item">
-                        <div class="post-meta">
-                            <span class="post-date"><i class="fa-regular fa-calendar"></i> {{ post.date | date: "%Y.%m.%d" }}</span>
-                        </div>
-                        <h3 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                        <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
-                    </article>
+            <!-- 5. 논문 / 컨퍼런스 -->
+            <section id="cat-paper" class="cat-card-group active">
+                <div class="cat-title-bar">
+                    <h2>논문 / 컨퍼런스</h2>
+                </div>
+                <div class="post-list">
+                    {% assign count = 0 %}
+                    {% for post in site.posts %}
+                        {% assign cat_str = post.categories | join: ' ' | downcase %}
+                        {% assign single_cat = post.category | downcase %}
+                        {% if cat_str contains 'paper' or single_cat == 'paper' %}
+                        {% assign count = count | plus: 1 %}
+                        <article class="post-item">
+                            <div class="post-meta">{{ post.date | date: "%Y.%m.%d" }}</div>
+                            <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                            <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+                        </article>
+                        {% endif %}
+                    {% endfor %}
+                    {% if count == 0 %}
+                        <p class="empty-msg">등록된 포스팅이 없습니다.</p>
                     {% endif %}
-                {% endfor %}
-            </div>
-        </section>
+                </div>
+            </section>
 
-        <!-- 6. 공모전 / 자격증 -->
-        <section id="cert" class="cat-group">
-            <h2 class="cat-group-title"><i class="fa-solid fa-award"></i> 공모전 / 자격증</h2>
-            <div class="post-list">
-                {% for post in site.posts %}
-                    {% if post.category == 'cert' or post.categories contains 'cert' %}
-                    <article class="post-item">
-                        <div class="post-meta">
-                            <span class="post-date"><i class="fa-regular fa-calendar"></i> {{ post.date | date: "%Y.%m.%d" }}</span>
-                        </div>
-                        <h3 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                        <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
-                    </article>
+            <!-- 6. 공모전 / 자격증 -->
+            <section id="cat-cert" class="cat-card-group active">
+                <div class="cat-title-bar">
+                    <h2>공모전 / 자격증</h2>
+                </div>
+                <div class="post-list">
+                    {% assign count = 0 %}
+                    {% for post in site.posts %}
+                        {% assign cat_str = post.categories | join: ' ' | downcase %}
+                        {% assign single_cat = post.category | downcase %}
+                        {% if cat_str contains 'cert' or single_cat == 'cert' %}
+                        {% assign count = count | plus: 1 %}
+                        <article class="post-item">
+                            <div class="post-meta">{{ post.date | date: "%Y.%m.%d" }}</div>
+                            <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                            <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+                        </article>
+                        {% endif %}
+                    {% endfor %}
+                    {% if count == 0 %}
+                        <p class="empty-msg">등록된 포스팅이 없습니다.</p>
                     {% endif %}
-                {% endfor %}
-            </div>
-        </section>
+                </div>
+            </section>
 
+        </div>
     </div>
 </div>
+
+<script>
+    // 탭 클릭 이벤트 핸들러
+    function switchCategory(categoryKey) {
+        const buttons = document.querySelectorAll('.tab-btn');
+        const groups = document.querySelectorAll('.cat-card-group');
+
+        // 버튼 활성화 처리
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // 콘텐츠 섹션 필터링
+        groups.forEach(group => {
+            if (categoryKey === 'all') {
+                group.classList.add('active');
+            } else {
+                if (group.id === 'cat-' + categoryKey) {
+                    group.classList.add('active');
+                } else {
+                    group.classList.remove('active');
+                }
+            }
+        });
+    }
+
+    // URL 해시값(#dev 등) 접속 대응
+    window.addEventListener('DOMContentLoaded', () => {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) {
+            const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(
+                btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${hash}'`)
+            );
+            if (targetBtn) {
+                targetBtn.click();
+            }
+        }
+    });
+</script>
