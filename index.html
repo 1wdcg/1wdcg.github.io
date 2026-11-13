@@ -6,27 +6,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ site.title }} - Security Nest</title>
+    <!-- 파비콘 설정 -->
+    <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 최근 게시물 카테고리 필터 탭 스타일 */
+        .recent-filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .recent-filter-btn {
+            padding: 0.45rem 0.95rem;
+            border: 1px solid #d5e0d8;
+            background-color: #f6f9f7;
+            color: #4a6353;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .recent-filter-btn:hover {
+            background-color: #e6efe9;
+            color: #2c4234;
+        }
+        .recent-filter-btn.active {
+            background-color: #2e5a44;
+            color: #ffffff;
+            border-color: #2e5a44;
+        }
+        .recent-empty-msg {
+            display: none;
+            color: #6b7d72;
+            font-size: 0.92rem;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- 헤더 영역 -->
+    <!-- 헤더 영역 (우측 불필요한 메뉴 제거 및 기존 로고 복원) -->
     <header class="hero-header">
         <div class="nav-container">
-           <!-- 새 로고 디자인 반영 -->
-            <a href="/" class="logo">
-                <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="security nest logo" class="logo-img">
-                <div class="logo-text-box">
-                    <span class="logo-text-top">security</span>
-                    <span class="logo-text-bottom">nest</span>
-                </div>
-            </a>
-            <nav>
-                <a href="#about">소개</a>
-                <a href="#categories">카테고리</a>
-                <a href="#posts">포스팅</a>
-            </nav>
+            <a href="/" class="logo"><i class="fa-solid fa-feather-pointed"></i> Security Nest</a>
         </div>
         <div class="hero-content">
             <span class="hero-badge"><i class="fa-solid fa-tree"></i> Forest & Security Archive</span>
@@ -36,7 +62,7 @@
     </header>
 
     <div class="main-container">
-        <!-- 홈: 자기소개 (프로필) 영역 -->
+        <!-- 1. 소개 (프로필) 영역 -->
         <section id="about" class="profile-card">
             <div class="profile-avatar">
                 <img src="{{ '/assets/images/bird.jpg.jpg' | relative_url }}" alt="프로필 새 이미지">
@@ -52,12 +78,58 @@
             </div>
         </section>
 
-        <!-- 카테고리 6개 블록 -->
+        <!-- 2. 최근 게시글 목록 (카테고리 필터링 + start 태그 제외) -->
+        <section id="posts" class="posts-section">
+            <h2 class="section-title"><i class="fa-solid fa-feather"></i> Recent Posts</h2>
+
+            <!-- 카테고리 필터 버튼 -->
+            <div class="recent-filter-bar">
+                <button class="recent-filter-btn active" onclick="filterRecentPosts('all', this)">전체</button>
+                <button class="recent-filter-btn" onclick="filterRecentPosts('dev', this)">개발</button>
+                <button class="recent-filter-btn" onclick="filterRecentPosts('ctf', this)">CTF / Wargame</button>
+                <button class="recent-filter-btn" onclick="filterRecentPosts('bugbounty', this)">Bug Bounty</button>
+                <button class="recent-filter-btn" onclick="filterRecentPosts('docs', this)">기술문서</button>
+                <button class="recent-filter-btn" onclick="filterRecentPosts('paper', this)">논문 / 컨퍼런스</button>
+                <button class="recent-filter-btn" onclick="filterRecentPosts('cert', this)">공모전 / 자격증</button>
+            </div>
+
+            <div class="post-list" id="recent-post-list">
+                {% for post in site.posts %}
+                    <!-- start 태그가 없는 게시물만 렌더링 -->
+                    {% unless post.tags contains 'start' %}
+                        {% assign cat_raw = post.categories | join: '' | downcase | remove: ' ' %}
+                        {% if cat_raw == '' %}
+                            {% assign cat_raw = post.category | downcase | remove: ' ' %}
+                        {% endif %}
+
+                        {% assign norm_cat = 'etc' %}
+                        {% if cat_raw contains 'dev' %}{% assign norm_cat = 'dev' %}
+                        {% elsif cat_raw contains 'ctf' %}{% assign norm_cat = 'ctf' %}
+                        {% elsif cat_raw contains 'bug' %}{% assign norm_cat = 'bugbounty' %}
+                        {% elsif cat_raw contains 'docs' %}{% assign norm_cat = 'docs' %}
+                        {% elsif cat_raw contains 'paper' %}{% assign norm_cat = 'paper' %}
+                        {% elsif cat_raw contains 'cert' %}{% assign norm_cat = 'cert' %}
+                        {% endif %}
+
+                        <article class="post-item recent-post-item" data-category="{{ norm_cat }}">
+                            <div class="post-meta">
+                                <span class="post-category">{{ post.category | default: post.categories.first }}</span>
+                                <span class="post-date"><i class="fa-regular fa-calendar"></i> {{ post.date | date: "%Y.%m.%d" }}</span>
+                            </div>
+                            <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                            <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+                        </article>
+                    {% endunless %}
+                {% endfor %}
+            </div>
+            <p class="recent-empty-msg" id="recent-empty-msg">해당 카테고리에 등록된 최근 게시물이 없습니다.</p>
+        </section>
+
+        <!-- 3. 카테고리 6개 블록 (기존 아이콘 복원) -->
         <section id="categories" class="category-section">
             <h2 class="section-title"><i class="fa-solid fa-leaf"></i> Categories</h2>
             <div class="category-grid">
                 
-               <!-- 1. 새집 아이콘 예시 -->
                 <a href="{{ '/category.html#dev' | relative_url }}" class="cat-card">
                     <div class="cat-icon">
                         <img src="{{ '/assets/images/nest.png' | relative_url }}" alt="둥지">
@@ -66,7 +138,6 @@
                     <p>웹 개발 및 시스템 구축, 스크립팅 기록</p>
                 </a>
 
-<!-- 2. 둥지 아이콘 예시 -->
                 <a href="{{ '/category.html#ctf' | relative_url }}" class="cat-card">
                     <div class="cat-icon">
                         <img src="{{ '/assets/images/egg.png' | relative_url }}" alt="알">
@@ -107,13 +178,47 @@
                     <p>공모전, 보안 자격증 합격 수기 및 정보</p>
                 </a>
 
-
             </div>
         </section>
+    </div>
 
     <footer>
         <p><i class="fa-solid fa-tree"></i> Security Nest &copy; {{ site.time | date: "%Y" }}. Planted with HTML & Jekyll.</p>
     </footer>
+
+    <script>
+        function filterRecentPosts(category, btnElement) {
+            // 버튼 활성화 상태 업데이트
+            document.querySelectorAll('.recent-filter-btn').forEach(btn => btn.classList.remove('active'));
+            if (btnElement) btnElement.classList.add('active');
+
+            const items = document.querySelectorAll('.recent-post-item');
+            const emptyMsg = document.getElementById('recent-empty-msg');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const itemCat = item.getAttribute('data-category');
+                if (category === 'all' || itemCat === category) {
+                    if (visibleCount < 5) { // 최대 5개까지 노출
+                        item.style.display = '';
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            emptyMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        // 초기 로드 시 '전체' 기준 5개만 표시
+        window.addEventListener('DOMContentLoaded', () => {
+            const firstBtn = document.querySelector('.recent-filter-btn.active');
+            filterRecentPosts('all', firstBtn);
+        });
+    </script>
 
 </body>
 </html>

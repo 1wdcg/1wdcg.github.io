@@ -4,86 +4,61 @@ title: 카테고리 보관소
 permalink: /category.html
 ---
 
+<link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
+    /* 홈 화면과 조화를 이루는 밝은 숲 테마 */
     body {
-        background-color: #121915;
-        color: #e0e6e3;
+        background-color: #f3f7f4;
+        color: #24332a;
         margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    /* 상단 보관소 네비게이션 헤더 */
+    /* 상단 헤더 (기존 텍스트 로고 복원, 불필요 메뉴 제거) */
     .top-nav {
-        background-color: #16201a;
-        border-bottom: 1px solid #27362c;
-        padding: 0.8rem 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    /* 로고 스타일 */
-    .logo {
+        background-color: #244736;
+        border-bottom: 3px solid #7c5c3e;
+        padding: 1rem 2rem;
         display: flex;
         align-items: center;
-        gap: 10px;
+    }
+
+    .top-nav .logo {
+        color: #ffffff;
         text-decoration: none;
-    }
-
-    .logo-img {
-        height: 36px;
-        width: auto;
-    }
-
-    .logo-text-box {
+        font-size: 1.25rem;
+        font-weight: 700;
         display: flex;
-        flex-direction: column;
-        line-height: 1;
+        align-items: center;
+        gap: 0.5rem;
     }
 
-    .logo-text-top {
-        font-size: 1.05rem;
-        font-weight: 800;
-        color: #e0e6e3;
-    }
-
-    .logo-text-bottom {
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: #4ca1a3;
-    }
-
-    .home-link {
-        color: #92a699;
-        text-decoration: none;
-        font-size: 0.9rem;
-        font-weight: 600;
-    }
-
-    .home-link:hover {
-        color: #d1b280;
+    .top-nav .logo i {
+        color: #a3d9b8;
     }
 
     .archive-container {
         max-width: 1100px;
-        margin: 2rem auto;
+        margin: 2.5rem auto;
         padding: 0 1.5rem;
     }
 
     .archive-header {
-        border-bottom: 2px solid #2e3d34;
-        padding-bottom: 1.5rem;
+        border-bottom: 2px solid #d5e2da;
+        padding-bottom: 1.25rem;
         margin-bottom: 2rem;
     }
 
     .archive-header h1 {
-        font-size: 1.8rem;
-        color: #d1b280;
+        font-size: 1.85rem;
+        color: #1f4030;
         margin: 0 0 0.4rem 0;
     }
 
     .archive-header p {
-        color: #8fa396;
+        color: #5a7063;
         margin: 0;
         font-size: 0.95rem;
     }
@@ -94,13 +69,15 @@ permalink: /category.html
         align-items: flex-start;
     }
 
+    /* 좌측 카테고리 탭 (사이드바) */
     .category-sidebar {
         width: 220px;
         flex-shrink: 0;
-        background-color: #1a231e;
-        border: 1px solid #2a3830;
-        border-radius: 6px;
-        padding: 0.5rem;
+        background-color: #ffffff;
+        border: 1px solid #d8e4dc;
+        border-radius: 10px;
+        padding: 0.6rem;
+        box-shadow: 0 4px 12px rgba(30, 60, 45, 0.05);
         position: sticky;
         top: 2rem;
     }
@@ -111,9 +88,9 @@ permalink: /category.html
         padding: 0.75rem 1rem;
         margin-bottom: 0.25rem;
         background: transparent;
-        color: #a3b8ab;
+        color: #496153;
         border: none;
-        border-radius: 4px;
+        border-radius: 6px;
         text-align: left;
         font-size: 0.95rem;
         font-weight: 600;
@@ -123,28 +100,31 @@ permalink: /category.html
     }
 
     .tab-btn:hover {
-        background-color: #243029;
-        color: #e0e6e3;
+        background-color: #eef5f0;
+        color: #1f4030;
     }
 
+    /* 활성화된 탭 스타일 (포레스트 그린 & 나무 갈색 포인트) */
     .tab-btn.active {
-        background-color: #3b2d23;
-        color: #e5c390;
-        border-left: 4px solid #8c6843;
+        background-color: #2e5a44;
+        color: #ffffff;
+        border-left: 4px solid #8c6642;
     }
 
     .category-content-area {
         flex-grow: 1;
     }
 
+    /* 카테고리별 사각형 카드 영역 */
     .cat-card-group {
         display: none;
-        background-color: #19211c;
-        border: 1px solid #28362d;
-        border-left: 5px solid #485c4f;
-        border-radius: 6px;
+        background-color: #ffffff;
+        border: 1px solid #d8e4dc;
+        border-left: 5px solid #2e5a44;
+        border-radius: 10px;
         padding: 1.8rem;
         margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(30, 60, 45, 0.04);
     }
 
     .cat-card-group.active {
@@ -152,16 +132,16 @@ permalink: /category.html
     }
 
     .cat-title-bar {
-        border-bottom: 1px solid #2a3830;
+        border-bottom: 1px solid #e6efe9;
         padding-bottom: 0.75rem;
         margin-bottom: 1.25rem;
     }
 
     .cat-title-bar h2 {
         font-size: 1.35rem;
-        color: #d1b280;
+        color: #244736;
         margin: 0;
-        font-weight: 600;
+        font-weight: 700;
     }
 
     .post-list {
@@ -171,62 +151,68 @@ permalink: /category.html
     }
 
     .post-item {
-        background-color: #141c17;
-        border: 1px solid #222e26;
-        border-radius: 4px;
-        padding: 1rem 1.25rem;
+        background-color: #f9fbfa;
+        border: 1px solid #e1ebe4;
+        border-radius: 8px;
+        padding: 1.1rem 1.3rem;
+        transition: all 0.2s ease;
     }
 
     .post-item:hover {
-        border-color: #524133;
+        border-color: #8c6642;
+        background-color: #ffffff;
+        transform: translateY(-1px);
     }
 
     .post-meta {
-        font-size: 0.8rem;
-        color: #718779;
-        margin-bottom: 0.3rem;
+        font-size: 0.82rem;
+        color: #6c8275;
+        margin-bottom: 0.35rem;
     }
 
     .post-title {
-        margin: 0 0 0.4rem 0;
-        font-size: 1.1rem;
+        margin: 0 0 0.45rem 0;
+        font-size: 1.12rem;
     }
 
     .post-title a {
-        color: #cee0d5;
+        color: #1e3b2c;
         text-decoration: none;
-        font-weight: 600;
+        font-weight: 700;
     }
 
     .post-title a:hover {
-        color: #e5c390;
+        color: #7c5c3e;
     }
 
     .post-excerpt {
         margin: 0;
-        font-size: 0.88rem;
-        color: #92a699;
+        font-size: 0.9rem;
+        color: #53695c;
         line-height: 1.5;
     }
 
     .empty-msg {
-        color: #6a7d71;
-        font-size: 0.9rem;
+        color: #7b8f83;
+        font-size: 0.92rem;
         margin: 0;
         padding: 1rem 0;
     }
+
+    @media (max-width: 768px) {
+        .archive-layout {
+            flex-direction: column;
+        }
+        .category-sidebar {
+            width: 100%;
+            position: static;
+        }
+    }
 </style>
 
-<!-- 상단 네비게이션 헤더 (로고 포함) -->
+<!-- 상단 헤더 (로고 클릭 시 홈 이동) -->
 <div class="top-nav">
-    <a href="/" class="logo">
-        <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="security nest logo" class="logo-img">
-        <div class="logo-text-box">
-            <span class="logo-text-top">security</span>
-            <span class="logo-text-bottom">nest</span>
-        </div>
-    </a>
-    <a href="/" class="home-link">← 메인 홈으로</a>
+    <a href="/" class="logo"><i class="fa-solid fa-feather-pointed"></i> Security Nest</a>
 </div>
 
 <div class="archive-container">
@@ -238,13 +224,13 @@ permalink: /category.html
     <div class="archive-layout">
         <!-- 좌측 탭 메뉴 -->
         <nav class="category-sidebar">
-            <button class="tab-btn active" onclick="switchCategory('all')">전체 보기</button>
-            <button class="tab-btn" onclick="switchCategory('dev')">개발</button>
-            <button class="tab-btn" onclick="switchCategory('ctf')">CTF / Wargame</button>
-            <button class="tab-btn" onclick="switchCategory('bugbounty')">Bug Bounty</button>
-            <button class="tab-btn" onclick="switchCategory('docs')">기술문서</button>
-            <button class="tab-btn" onclick="switchCategory('paper')">논문 / 컨퍼런스</button>
-            <button class="tab-btn" onclick="switchCategory('cert')">공모전 / 자격증</button>
+            <button class="tab-btn active" onclick="switchCategory('all', this)">전체 보기</button>
+            <button class="tab-btn" onclick="switchCategory('dev', this)">개발</button>
+            <button class="tab-btn" onclick="switchCategory('ctf', this)">CTF / Wargame</button>
+            <button class="tab-btn" onclick="switchCategory('bugbounty', this)">Bug Bounty</button>
+            <button class="tab-btn" onclick="switchCategory('docs', this)">기술문서</button>
+            <button class="tab-btn" onclick="switchCategory('paper', this)">논문 / 컨퍼런스</button>
+            <button class="tab-btn" onclick="switchCategory('cert', this)">공모전 / 자격증</button>
         </nav>
 
         <!-- 우측 메인 콘텐츠 -->
@@ -381,12 +367,12 @@ permalink: /category.html
 </div>
 
 <script>
-    function switchCategory(categoryKey) {
+    function switchCategory(categoryKey, btnElement) {
         const buttons = document.querySelectorAll('.tab-btn');
         const groups = document.querySelectorAll('.cat-card-group');
 
         buttons.forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
+        if (btnElement) btnElement.classList.add('active');
 
         groups.forEach(group => {
             if (categoryKey === 'all') {
@@ -408,7 +394,7 @@ permalink: /category.html
                 btn => btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${hash}'`)
             );
             if (targetBtn) {
-                targetBtn.click();
+                switchCategory(hash, targetBtn);
             }
         }
     });
